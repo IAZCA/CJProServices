@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CJ Pro Designs</title>
+<meta name="theme-color" content="#061630">
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/favicon.png">
+<script>(function(){var r=document.documentElement,q=new URLSearchParams(location.search).get('motion'),rm=matchMedia('(prefers-reduced-motion: reduce)').matches;r.dataset.motion=q==='on'?'on':q==='off'?'off':(rm?'off':'on');setTimeout(function(){if(!window.__siteReady)r.dataset.motion='off'},2500)})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/base.css">
+<style>
+:root { --bg: #061630; --text: #e8eef7; --muted: #a3b3cb; --line: rgba(255,255,255,.12); --accent: #fe5b00; --accent-hi: #ff7a2e; --accent-ink: #03112a; --font-head: "Archivo", sans-serif; --font-body: "Figtree", sans-serif; }
+body { min-height: 100svh; padding: 48px 0 64px; background: radial-gradient(900px 500px at 80% 0%, rgba(254,91,0,.14), transparent 60%), var(--bg); }
+.top { display: flex; flex-wrap: wrap; align-items: center; gap: 22px; margin-bottom: 40px; }
+.top img { height: 64px; width: auto; }
+h1 { font-stretch: 125%; font-weight: 850; font-size: clamp(1.8rem, 5vw, 2.6rem); }
+.sub { color: var(--muted); margin-top: 6px; }
+.grid { display: grid; gap: 18px; }
+@media (min-width: 900px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+.pick { display: block; text-decoration: none; border-radius: 20px; overflow: hidden; border: 1px solid var(--line); background: #0c2650; transition: transform .45s cubic-bezier(.2,.8,.2,1), border-color .3s, box-shadow .45s; }
+@media (hover: hover) { .pick:hover { transform: translateY(-6px); border-color: var(--accent); box-shadow: 0 30px 50px -30px #000; } }
+.sw { height: 150px; position: relative; overflow: hidden; }
+.sw1 { background: radial-gradient(260px 160px at 75% 50%, rgba(254,91,0,.4), transparent 70%), linear-gradient(160deg, #0d2b58, #061630); }
+.sw2 { background: linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px) 0 0 / 20px 20px, linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px) 0 0 / 20px 20px, linear-gradient(#0a2650 0 55%, #b7c1cd 55%); }
+.sw3 { background: var(--navy, #022351); }
+.sw3::before { content: ""; position: absolute; right: -20px; top: -20px; bottom: -20px; width: 46%; background: #fe5b00; transform: skewX(-24deg); }
+.sw3::after { content: ""; position: absolute; right: 50%; top: -20px; bottom: -20px; width: 4%; background: #fff; transform: skewX(-24deg); }
+.sw img { position: absolute; left: 20px; bottom: 18px; height: 46px; width: auto; z-index: 1; }
+.body { padding: 20px 22px 24px; }
+.num { color: var(--accent); font-weight: 700; font-size: .82rem; letter-spacing: .14em; text-transform: uppercase; }
+.pick h2 { font-stretch: 125%; font-weight: 850; font-size: 1.5rem; margin: 6px 0 8px; }
+.pick p { color: var(--muted); }
+.open { display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; font-weight: 700; color: var(--text); }
+.open .ic { color: var(--accent); transition: transform .35s; }
+@media (hover: hover) { .pick:hover .open .ic { transform: translateX(5px); } }
+.notes { margin-top: 34px; color: var(--muted); font-size: .95rem; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol></svg>
+<div class="wrap">
+  <div class="top" data-reveal>
+    <img src="assets/lockup-reverse.png" alt="CJ Pro Services" width="475" height="120">
+    <div><h1>Pick a design</h1><p class="sub">Three test layouts in the logo's navy and orange. Open each on your phone too.</p></div>
+  </div>
+  <div class="grid" data-stagger>
+    <a class="pick" href="index.html" data-keep-q><div class="sw sw1"><img src="assets/lockup-reverse.png" alt=""></div><div class="body"><span class="num">Design 1 · chosen</span><h2>Night Shift</h2><p>Dark navy all the way, with a glowing logo, soft air-flow lines and rounded cards.</p><span class="open">Open<svg class="ic"><use href="#i-arrow"/></svg></span></div></a>
+    <a class="pick" href="design-2-blueprint.html" data-keep-q><div class="sw sw2"><img src="assets/lockup-reverse.png" alt=""></div><div class="body"><span class="num">Design 2</span><h2>Blueprint</h2><p>A navy blueprint hero over cool grey "drawing paper". Technical and tidy. The lightest of the three, but still no bright white.</p><span class="open">Open<svg class="ic"><use href="#i-arrow"/></svg></span></div></a>
+    <a class="pick" href="design-3-truck-wrap.html" data-keep-q><div class="sw sw3"><img src="assets/lockup-reverse.png" alt=""></div><div class="body"><span class="num">Design 3</span><h2>Truck Wrap</h2><p>Bold and loud like a work van: big slanted type, orange stripes, a scrolling ticker and a swipe photo strip.</p><span class="open">Open<svg class="ic"><use href="#i-arrow"/></svg></span></div></a>
+  </div>
+  <p class="notes" data-reveal>Test site only. The photo areas are blank placeholders and the quote form isn't connected.</p>
+</div>
+<script src="assets/site.js" defer></script>
+</body>
+</html>

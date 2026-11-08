@@ -3,56 +3,432 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>CJ Pro Designs</title>
-<meta name="theme-color" content="#061630">
+<title>CJ Pro Services | Heating, Cooling &amp; Home Repair in Laurel, MD</title>
+<meta name="description" content="CJ Pro Services LLC: licensed, EPA-certified heating, cooling, electrical and home repair in Laurel, Maryland. Call (301) 379-8609.">
+<meta name="theme-color" content="#0a234b">
+<meta name="robots" content="noindex">
 <link rel="icon" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/favicon.png">
 <script>(function(){var r=document.documentElement,q=new URLSearchParams(location.search).get('motion'),rm=matchMedia('(prefers-reduced-motion: reduce)').matches;r.dataset.motion=q==='on'?'on':q==='off'?'off':(rm?'off':'on');setTimeout(function(){if(!window.__siteReady)r.dataset.motion='off'},2500)})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/base.css">
 <style>
-:root { --bg: #061630; --text: #e8eef7; --muted: #a3b3cb; --line: rgba(255,255,255,.12); --accent: #fe5b00; --accent-hi: #ff7a2e; --accent-ink: #03112a; --font-head: "Archivo", sans-serif; --font-body: "Figtree", sans-serif; }
-body { min-height: 100svh; padding: 48px 0 64px; background: radial-gradient(900px 500px at 80% 0%, rgba(254,91,0,.14), transparent 60%), var(--bg); }
-.top { display: flex; flex-wrap: wrap; align-items: center; gap: 22px; margin-bottom: 40px; }
-.top img { height: 64px; width: auto; }
-h1 { font-stretch: 125%; font-weight: 850; font-size: clamp(1.8rem, 5vw, 2.6rem); }
-.sub { color: var(--muted); margin-top: 6px; }
-.grid { display: grid; gap: 18px; }
-@media (min-width: 900px) { .grid { grid-template-columns: repeat(3, 1fr); } }
-.pick { display: block; text-decoration: none; border-radius: 20px; overflow: hidden; border: 1px solid var(--line); background: #0c2650; transition: transform .45s cubic-bezier(.2,.8,.2,1), border-color .3s, box-shadow .45s; }
-@media (hover: hover) { .pick:hover { transform: translateY(-6px); border-color: var(--accent); box-shadow: 0 30px 50px -30px #000; } }
-.sw { height: 150px; position: relative; overflow: hidden; }
-.sw1 { background: radial-gradient(260px 160px at 75% 50%, rgba(254,91,0,.4), transparent 70%), linear-gradient(160deg, #0d2b58, #061630); }
-.sw2 { background: linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px) 0 0 / 20px 20px, linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px) 0 0 / 20px 20px, linear-gradient(#0a2650 0 55%, #b7c1cd 55%); }
-.sw3 { background: var(--navy, #022351); }
-.sw3::before { content: ""; position: absolute; right: -20px; top: -20px; bottom: -20px; width: 46%; background: #fe5b00; transform: skewX(-24deg); }
-.sw3::after { content: ""; position: absolute; right: 50%; top: -20px; bottom: -20px; width: 4%; background: #fff; transform: skewX(-24deg); }
-.sw img { position: absolute; left: 20px; bottom: 18px; height: 46px; width: auto; z-index: 1; }
-.body { padding: 20px 22px 24px; }
-.num { color: var(--accent); font-weight: 700; font-size: .82rem; letter-spacing: .14em; text-transform: uppercase; }
-.pick h2 { font-stretch: 125%; font-weight: 850; font-size: 1.5rem; margin: 6px 0 8px; }
-.pick p { color: var(--muted); }
-.open { display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; font-weight: 700; color: var(--text); }
-.open .ic { color: var(--accent); transition: transform .35s; }
-@media (hover: hover) { .pick:hover .open .ic { transform: translateX(5px); } }
-.notes { margin-top: 34px; color: var(--muted); font-size: .95rem; }
+:root {
+  --bg: #0a234b; --bg2: #0e2a59; --surface: #143567; --surface2: #183e76;
+  --text: #f0f4fa; --muted: #b8c7dc; --line: rgba(255,255,255,.14);
+  --accent: #fe5b00; --accent-hi: #ff7a2e; --accent-ink: #03112a;
+  --font-head: "Archivo", system-ui, sans-serif; --font-body: "Figtree", system-ui, sans-serif;
+  --drawer-bg: #0e2a59; --callbar-bg: rgba(8, 28, 62, .94);
+}
+h1, h2, h3, .drawer-nav a { font-stretch: 125%; font-weight: 850; letter-spacing: -.01em; }
+.hl { color: var(--accent); }
+.kicker { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; font-size: .82rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+.kicker::before { content: ""; width: 26px; height: 2px; background: currentColor; border-radius: 2px; }
+.btn-ghost { color: var(--text); border-color: rgba(255,255,255,.28); }
+@media (hover: hover) { .btn-ghost:hover { border-color: var(--text); background: rgba(255,255,255,.06); transform: translateY(-2px); } }
+
+/* top bar + header */
+.topbar { background: #071b3d; color: var(--muted); font-size: .84rem; }
+.topbar-in { display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 38px; }
+.topbar a { color: var(--text); font-weight: 700; text-decoration: none; }
+.test-pill { display: inline-block; padding: 2px 10px; border-radius: 99px; border: 1px solid rgba(254,91,0,.6); color: #ffb48a; font-size: .74rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-right: 14px; }
+@media (max-width: 759px) { .topbar .tb-lic { display: none; } .topbar-in { justify-content: center; } }
+.site-head { background: rgba(10, 35, 75, .78); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid transparent; }
+.site-head.scrolled { background: rgba(10, 35, 75, .94); border-color: var(--line); box-shadow: 0 14px 30px -20px rgba(0,0,0,.8); }
+.head-in { display: flex; align-items: center; gap: 24px; min-height: 76px; transition: min-height .35s; }
+.site-head.scrolled .head-in { min-height: 64px; }
+.brand img { height: 46px; width: auto; transition: height .35s; }
+.site-head.scrolled .brand img { height: 40px; }
+.nav { display: none; gap: 30px; margin-left: auto; font-weight: 600; }
+.nav a { text-decoration: none; color: var(--muted); transition: color .25s; padding: 6px 0; }
+.nav a:hover, .nav a.active { color: var(--text); }
+.head-cta { display: none; }
+@media (min-width: 960px) { .nav { display: flex; } .head-cta { display: inline-flex; } }
+.menu-btn { margin-left: auto; }
+
+/* hero */
+.hero { position: relative; overflow: hidden; padding: 56px 0 96px;
+  background: radial-gradient(900px 520px at 78% 40%, rgba(254,91,0,.24), transparent 60%), radial-gradient(800px 600px at 10% 0%, #17417f, transparent 70%), var(--bg); }
+.flow { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: .55; }
+.flow path { fill: none; stroke-width: 2; stroke-linecap: round; stroke-dasharray: 14 22; animation: flow 9s linear infinite; }
+.flow path:nth-child(2) { animation-duration: 12s; }
+.flow path:nth-child(3) { animation-duration: 15s; animation-direction: reverse; }
+@keyframes flow { to { stroke-dashoffset: -360; } }
+.hero-in { position: relative; display: grid; gap: 40px; align-items: center; }
+@media (min-width: 960px) { .hero { padding: 84px 0 120px; } .hero-in { grid-template-columns: 1.15fr .85fr; } }
+.eyebrow { color: var(--muted); font-weight: 600; margin-bottom: 18px; font-size: .95rem; }
+.hero h1 { font-size: clamp(2.6rem, 7.4vw, 5rem); line-height: .98; margin-bottom: 22px; }
+.lede { font-size: 1.1rem; color: #d6e0ee; max-width: 34em; margin-bottom: 30px; }
+.cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 30px; }
+@media (max-width: 479px) { .cta-row .btn { width: 100%; } }
+.chips { display: flex; flex-wrap: wrap; gap: 10px; }
+.chips li { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 99px; background: rgba(255,255,255,.09); border: 1px solid var(--line); font-size: .86rem; font-weight: 600; color: #d6e0ee; }
+.chips .ic { color: var(--accent); font-size: 16px; }
+.hero-art { display: grid; place-items: center; }
+.emblem { position: relative; width: min(78vw, 430px); aspect-ratio: 1; display: grid; place-items: center; }
+.emblem::before { content: ""; position: absolute; inset: 6%; border-radius: 50%; background: radial-gradient(circle, rgba(254,91,0,.42), rgba(254,91,0,0) 68%); filter: blur(8px); animation: pulse 6s ease-in-out infinite; }
+.emblem::after { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 1px dashed rgba(255,255,255,.14); animation: spin 60s linear infinite; }
+.emblem img { position: relative; width: 82%; animation: float 7s ease-in-out infinite; filter: drop-shadow(0 30px 40px rgba(0,0,0,.45)); }
+@keyframes float { 50% { transform: translateY(-12px); } }
+@keyframes pulse { 50% { transform: scale(1.06); opacity: .8; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (max-width: 959px) { .hero { padding-top: 28px; } .hero-art { order: -1; } .hero-in { gap: 18px; } .emblem { width: min(44vw, 190px); } }
+.scroll-cue { position: absolute; left: 50%; bottom: 26px; width: 26px; height: 42px; margin-left: -13px; border: 2px solid rgba(255,255,255,.3); border-radius: 14px; }
+.scroll-cue span { position: absolute; left: 50%; top: 8px; width: 4px; height: 8px; margin-left: -2px; border-radius: 2px; background: var(--accent); animation: cue 1.8s ease-in-out infinite; }
+@keyframes cue { 0% { opacity: 0; transform: translateY(0); } 30% { opacity: 1; } 100% { opacity: 0; transform: translateY(14px); } }
+@media (max-width: 759px) { .scroll-cue { display: none; } }
+
+/* sections */
+.sec { padding: 88px 0; }
+.sec.alt { background: var(--bg2); }
+@media (max-width: 759px) { .sec { padding: 64px 0; } }
+.sec-head { max-width: 640px; margin-bottom: 44px; }
+.sec-head h2 { font-size: clamp(2rem, 5vw, 3.1rem); margin-bottom: 14px; }
+.sec-head p { color: var(--muted); font-size: 1.05rem; }
+
+/* services */
+.cards { display: grid; gap: 16px; }
+@media (min-width: 640px) { .cards { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .cards { grid-template-columns: repeat(3, 1fr); gap: 20px; } }
+.card { position: relative; overflow: hidden; padding: 28px 26px 30px; border-radius: 20px; background: linear-gradient(180deg, #173b70, #112f5f); border: 1px solid var(--line);
+  transition: transform .45s cubic-bezier(.2,.8,.2,1), border-color .35s, box-shadow .45s; }
+.card::before { content: ""; position: absolute; inset: 0; opacity: 0; transition: opacity .35s; pointer-events: none;
+  background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 0%), rgba(254,91,0,.16), transparent 60%); }
+@media (hover: hover) { .card:hover { transform: translateY(-6px); border-color: rgba(254,91,0,.45); box-shadow: 0 26px 50px -30px rgba(0,0,0,.9); } .card:hover::before { opacity: 1; } }
+.card-ic { display: grid; place-items: center; width: 54px; height: 54px; border-radius: 16px; background: rgba(254,91,0,.12); color: var(--accent); font-size: 28px; margin-bottom: 20px; transition: transform .45s cubic-bezier(.2,.8,.2,1); }
+@media (hover: hover) { .card:hover .card-ic { transform: rotate(-8deg) scale(1.08); } }
+.card h3 { font-size: 1.25rem; margin-bottom: 10px; }
+.card p { color: var(--muted); }
+
+/* process */
+.steps { position: relative; display: grid; gap: 28px; counter-reset: step; }
+@media (min-width: 900px) { .steps { grid-template-columns: repeat(4, 1fr); gap: 24px; } }
+.steps-line { display: none; }
+@media (min-width: 900px) {
+  .steps-line { display: block; position: absolute; left: 28px; right: 28px; top: 27px; height: 2px; background: var(--line); }
+  .steps-line i { position: absolute; inset: 0; background: linear-gradient(90deg, var(--accent), #ffa064); transform-origin: 0 50%; transform: scaleX(0); transition: transform 1.6s cubic-bezier(.6,0,.2,1) .3s; }
+  .steps.in .steps-line i, html[data-motion="off"] .steps-line i { transform: none; }
+}
+.step { position: relative; display: grid; grid-template-columns: 56px 1fr; gap: 18px; }
+@media (min-width: 900px) { .step { grid-template-columns: 1fr; } }
+.step-n { position: relative; z-index: 1; width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; background: var(--bg2); border: 2px solid var(--accent); color: var(--accent); font-family: var(--font-head); font-stretch: 125%; font-weight: 850; font-size: 1.2rem; }
+.sec.alt .step-n { background: var(--bg2); }
+.step h3 { font-size: 1.12rem; margin: 6px 0 8px; }
+.step p { color: var(--muted); }
+
+/* gallery */
+.work-top { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 30px; }
+.work-top .sec-head { margin-bottom: 0; }
+.tablist { background: rgba(255,255,255,.06); border: 1px solid var(--line); }
+.tablist [role="tab"] { color: var(--muted); }
+.tablist [aria-selected="true"] { color: var(--accent-ink); }
+.gallery { display: grid; gap: 14px; grid-template-columns: repeat(2, 1fr); }
+@media (min-width: 900px) { .gallery { grid-template-columns: repeat(3, 1fr); gap: 18px; } }
+.ph-box { aspect-ratio: 4 / 3; border-radius: 16px; display: grid; place-content: center; justify-items: center; gap: 10px; text-align: center; padding: 12px;
+  border: 2px dashed rgba(255,255,255,.16); background: repeating-linear-gradient(135deg, rgba(255,255,255,.025) 0 12px, transparent 12px 24px), var(--surface);
+  color: var(--muted); font-size: .86rem; font-weight: 600; transition: border-color .35s, transform .45s cubic-bezier(.2,.8,.2,1); }
+.ph-box .ic { font-size: 30px; color: rgba(254,91,0,.75); }
+@media (hover: hover) { .ph:hover .ph-box { border-color: rgba(254,91,0,.55); transform: translateY(-4px); } }
+.ph figcaption { margin-top: 10px; font-weight: 700; font-size: .92rem; }
+.ph figcaption span { display: block; font-weight: 500; color: var(--muted); font-size: .84rem; }
+@media (max-width: 479px) { .ph-box span { display: none; } }
+
+/* about */
+.about { display: grid; gap: 36px; align-items: start; }
+@media (min-width: 960px) { .about { grid-template-columns: 1.1fr .9fr; gap: 56px; } }
+.about-text p { color: #d6e0ee; margin-bottom: 16px; font-size: 1.05rem; }
+.cred { border-radius: 22px; padding: 28px; background: linear-gradient(160deg, #183f78, #112f5f); border: 1px solid var(--line); }
+.cred h3 { font-size: 1.15rem; margin-bottom: 18px; }
+.cred li { display: flex; gap: 14px; align-items: flex-start; padding: 14px 0; border-top: 1px solid var(--line); }
+.cred li:first-child { border-top: 0; padding-top: 0; }
+.cred .ic { font-size: 22px; color: var(--accent); margin-top: 2px; }
+.cred b { display: block; }
+.cred small { color: var(--muted); font-size: .9rem; }
+.area { margin-top: 26px; display: flex; gap: 14px; align-items: center; padding: 18px 20px; border-radius: 16px; background: rgba(254,91,0,.08); border: 1px solid rgba(254,91,0,.25); }
+.area .ic { font-size: 26px; color: var(--accent); }
+
+
+/* wide last service card */
+@media (min-width: 640px) { .card.wide { grid-column: 1 / -1; display: flex; gap: 22px; align-items: center; } .card.wide .card-ic { margin-bottom: 0; } }
+
+
+/* soft-white sections (not pure white, so it doesn't glare) */
+.sec.light { --text: #0b2147; --muted: #4b5e7a; --line: rgba(2,35,81,.12); background: #eef1f6; color: var(--text); }
+.light .kicker { color: #c24200; }
+.light .card { background: #fbfcfe; border-color: rgba(2,35,81,.1); box-shadow: 0 14px 34px -24px rgba(2,35,81,.45); }
+.light .card::before { background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 0%), rgba(254,91,0,.1), transparent 60%); }
+@media (hover: hover) { .light .card:hover { border-color: rgba(254,91,0,.5); box-shadow: 0 26px 46px -26px rgba(2,35,81,.5); } }
+.light .card-ic { background: rgba(254,91,0,.1); }
+.light .tablist { background: #fff; border-color: rgba(2,35,81,.14); }
+.light .tablist [role="tab"] { color: var(--muted); }
+.light .tablist [aria-selected="true"] { color: var(--accent-ink); }
+.light .ph-box { background: repeating-linear-gradient(135deg, rgba(2,35,81,.035) 0 12px, transparent 12px 24px), #f8f9fc; border-color: rgba(2,35,81,.2); }
+
+/* call band */
+.band { position: relative; overflow: hidden; border-radius: 26px; padding: 44px 28px; text-align: center; background: linear-gradient(120deg, #fe5b00, #ff7f2a); color: var(--accent-ink); }
+.band::after { content: ""; position: absolute; width: 420px; height: 420px; right: -120px; top: -200px; border-radius: 50%; border: 60px solid rgba(255,255,255,.12); }
+.band h2 { font-size: clamp(1.7rem, 4.6vw, 2.7rem); margin-bottom: 12px; position: relative; }
+.band p { font-weight: 600; margin-bottom: 24px; position: relative; }
+.band .btn { position: relative; background: var(--accent-ink); color: #fff; }
+@media (hover: hover) { .band .btn:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 16px 30px -14px rgba(3,17,42,.9); } }
+
+/* contact */
+.contact { display: grid; gap: 28px; }
+@media (min-width: 960px) { .contact { grid-template-columns: .85fr 1.15fr; gap: 48px; } }
+.contact-info p { color: var(--muted); margin-bottom: 22px; }
+.big-phone { display: inline-flex; align-items: center; min-height: 52px; gap: 12px; font-family: var(--font-head); font-stretch: 125%; font-weight: 850; font-size: clamp(1.5rem, 4.4vw, 2.1rem); color: var(--text); text-decoration: none; margin-bottom: 18px; }
+.big-phone .ic { color: var(--accent); }
+.form { display: grid; gap: 14px; padding: 26px; border-radius: 22px; background: var(--surface); border: 1px solid var(--line); }
+@media (min-width: 640px) { .form { grid-template-columns: 1fr 1fr; padding: 32px; } .form .full { grid-column: 1 / -1; } }
+.form label { display: grid; gap: 6px; font-weight: 600; font-size: .92rem; }
+.form input, .form select, .form textarea { width: 100%; min-height: 50px; padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,.16); background: #0c2752; color: var(--text); transition: border-color .25s, box-shadow .25s; }
+.form textarea { min-height: 120px; }
+.form input:focus, .form select:focus, .form textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px rgba(254,91,0,.2); }
+.form .note { color: var(--muted); font-size: .84rem; }
+
+/* footer */
+.foot { border-top: 1px solid var(--line); padding: 56px 0 34px; background: #071b3d; color: var(--muted); }
+.foot-in { display: grid; gap: 30px; }
+@media (min-width: 860px) { .foot-in { grid-template-columns: 1.3fr 1fr 1fr; } }
+.foot img { height: 50px; width: auto; margin-bottom: 14px; }
+.foot h4 { color: var(--text); margin: 0 0 12px; font-size: .95rem; }
+.foot a { text-decoration: none; }
+.foot a:hover { color: var(--text); }
+.foot li { margin-bottom: 8px; }
+.foot-base { margin-top: 36px; padding-top: 22px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; font-size: .86rem; }
+.callbar .btn-ghost { color: #fff; }
 </style>
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol></svg>
-<div class="wrap">
-  <div class="top" data-reveal>
-    <img src="assets/lockup-reverse.png" alt="CJ Pro Services" width="475" height="120">
-    <div><h1>Pick a design</h1><p class="sub">Three test layouts in the logo's navy and orange. Open each on your phone too.</p></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 3c1 3.5 5 5.6 5 10.2a5 5 0 0 1-10 0c0-2.3 1.1-3.7 2.2-4.7.2 1.7 1 2.7 2 3C10.7 9 11.3 5.6 12 3z"/></symbol>
+  <symbol id="i-snow" viewBox="0 0 24 24"><path d="M12 2v20M3.3 7l17.4 10M3.3 17L20.7 7M9 3.8l3 2 3-2M9 20.2l3-2 3 2"/></symbol>
+  <symbol id="i-pump" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="10" cy="12" r="4"/><path d="M10 8v8M6 12h8M17 9h1M17 12h1M17 15h1"/></symbol>
+  <symbol id="i-swap" viewBox="0 0 24 24"><path d="M4 8h15l-4-4M20 16H5l4 4"/></symbol>
+  <symbol id="i-gauge" viewBox="0 0 24 24"><path d="M4 17a8 8 0 1 1 16 0"/><path d="M12 17l4-5"/><circle cx="12" cy="17" r="1.3"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></symbol>
+  <symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></symbol>
+  <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M5 19c0-8 5-13 15-14-1 10-6 15-14 15"/><path d="M5 19l7-7"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2L4.5 13.5H11L10 22l8.5-11.5H12z"/></symbol>
+  <symbol id="i-quote" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9zM9 11h6M9 15h4"/></symbol>
+</svg>
+<a class="skip" href="#main">Skip to content</a>
+<div class="progress" aria-hidden="true"></div>
+
+<div class="topbar"><div class="wrap topbar-in">
+  <span class="tb-lic">Licensed in Maryland · HVACR #52758 · MHIC #114256</span>
+  <span><span class="test-pill">Test site</span><a href="tel:+13013798609">(301) 379-8609</a></span>
+</div></div>
+
+<header class="site-head"><div class="wrap head-in">
+  <a class="brand" href="#top" aria-label="CJ Pro Services, back to top"><img src="assets/lockup-reverse.png" alt="CJ Pro Services" width="475" height="120"></a>
+  <nav class="nav" aria-label="Main">
+    <a href="#services">Services</a><a href="#process">How it works</a><a href="#work">Our work</a><a href="#about">About</a><a href="#contact">Contact</a>
+    <span class="nav-ind" aria-hidden="true"></span>
+  </nav>
+  <a class="btn btn-accent head-cta" href="tel:+13013798609"><svg class="ic"><use href="#i-phone"/></svg>(301) 379-8609</a>
+  <button class="menu-btn" aria-expanded="false" aria-controls="drawer" aria-label="Open menu"><svg class="ic"><use href="#i-menu"/></svg></button>
+</div></header>
+
+<main id="main">
+  <section class="hero" id="home">
+    <svg class="flow" viewBox="0 0 1200 700" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M-50 520 C 200 440, 380 600, 620 520 S 1000 420, 1260 500" stroke="rgba(254,91,0,.55)"/>
+      <path d="M-50 580 C 240 500, 420 660, 660 580 S 1020 480, 1260 560" stroke="rgba(120,160,220,.35)"/>
+      <path d="M-50 160 C 260 220, 460 80, 720 150 S 1060 230, 1260 140" stroke="rgba(120,160,220,.25)"/>
+    </svg>
+    <div class="wrap hero-in">
+      <div class="hero-copy">
+        <p class="eyebrow" data-reveal>Heating · Cooling · Electrical · Home repair · Laurel, MD</p>
+        <h1 data-reveal style="--i:1">Comfort,<br><span class="hl">fixed right.</span></h1>
+        <p class="lede" data-reveal style="--i:2">Repairs, replacements and new installs from a licensed, EPA-certified HVACR technician. Written quotes, clean work, and every system tested before we leave.</p>
+        <div class="cta-row" data-reveal style="--i:3">
+          <a class="btn btn-accent btn-lg" href="tel:+13013798609"><svg class="ic"><use href="#i-phone"/></svg>Call (301) 379-8609</a>
+          <a class="btn btn-ghost btn-lg" href="#contact">Request a quote</a>
+        </div>
+        <ul class="chips" data-stagger>
+          <li><svg class="ic"><use href="#i-shield"/></svg>MD HVACR Lic. #52758</li>
+          <li><svg class="ic"><use href="#i-home"/></svg>MHIC Lic. #114256</li>
+          <li><svg class="ic"><use href="#i-leaf"/></svg>EPA certified</li>
+        </ul>
+      </div>
+      <div class="hero-art" data-parallax="-0.08">
+        <div class="emblem" data-reveal="scale" style="--i:2"><img src="assets/mark-reverse.png" alt="" width="480" height="425"></div>
+      </div>
+    </div>
+    <a class="scroll-cue" href="#services" aria-label="Scroll to services"><span></span></a>
+  </section>
+
+  <section class="sec light" id="services">
+    <div class="wrap">
+      <header class="sec-head" data-reveal>
+        <p class="kicker">What we do</p>
+        <h2>Services</h2>
+        <p>From a no-heat night to a full system replacement, we handle the job start to finish.</p>
+      </header>
+      <div class="cards" data-stagger>
+        <article class="card" data-glow><span class="card-ic"><svg class="ic"><use href="#i-flame"/></svg></span><h3>Heating repair</h3><p>Furnaces, heat pumps and electric heat diagnosed and fixed so the house warms back up.</p></article>
+        <article class="card" data-glow><span class="card-ic"><svg class="ic"><use href="#i-snow"/></svg></span><h3>AC repair</h3><p>Weak airflow, warm air or a unit that won't start: we find the cause and fix it.</p></article>
+        <article class="card" data-glow><span class="card-ic"><svg class="ic"><use href="#i-pump"/></svg></span><h3>Heat pump installs</h3><p>High-efficiency heat pump systems using today's A2L refrigerants, like R-454B.</p></article>
+        <article class="card" data-glow><span class="card-ic"><svg class="ic"><use href="#i-swap"/></svg></span><h3>System replacement</h3><p>Old equipment removed and hauled away. New system brazed, wired, drained and ducted.</p></article>
+        <article class="card" data-glow><span class="card-ic"><svg class="ic"><use href="#i-gauge"/></svg></span><h3>Maintenance</h3><p>Seasonal check-ups that keep your system efficient and catch small problems early.</p></article>
+        <article class="card" data-glow><span class="card-ic"><svg class="ic"><use href="#i-bolt"/></svg></span><h3>Electrical work</h3><p>Equipment wiring, disconnects, circuits and electrical repairs around the home.</p></article>
+        <article class="card wide" data-glow><span class="card-ic"><svg class="ic"><use href="#i-home"/></svg></span><div><h3>Home repair</h3><p>MHIC-licensed for home improvement and repair work around the house.</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec alt" id="process">
+    <div class="wrap">
+      <header class="sec-head" data-reveal>
+        <p class="kicker">How it works</p>
+        <h2>Four steps. No surprises.</h2>
+        <p>Every job follows the same simple path, from your first call to the final test run.</p>
+      </header>
+      <div class="steps" data-reveal="fade">
+        <span class="steps-line" aria-hidden="true"><i></i></span>
+        <div class="step" data-reveal style="--i:1"><span class="step-n">1</span><div><h3>Call or request a quote</h3><p>Tell us what's going on. We'll set a time that works for you.</p></div></div>
+        <div class="step" data-reveal style="--i:2"><span class="step-n">2</span><div><h3>Inspect &amp; quote</h3><p>We check the system and give you a written, itemized quote.</p></div></div>
+        <div class="step" data-reveal style="--i:3"><span class="step-n">3</span><div><h3>Do the work</h3><p>Repairs or installs done to code, with the old equipment hauled off.</p></div></div>
+        <div class="step" data-reveal style="--i:4"><span class="step-n">4</span><div><h3>Start up &amp; test</h3><p>We run and test the system for proper operation before we leave.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec light" id="work">
+    <div class="wrap">
+      <div class="tabs" data-tabs>
+        <div class="work-top">
+          <header class="sec-head" data-reveal>
+            <p class="kicker">Our work</p>
+            <h2>Installs &amp; finished jobs</h2>
+            <p>Photos from real jobs will go here.</p>
+          </header>
+          <div class="tablist" role="tablist" aria-label="Project photos" data-reveal style="--i:1">
+            <button role="tab" id="t-inst" aria-controls="p-inst" aria-selected="true">Installations</button>
+            <button role="tab" id="t-done" aria-controls="p-done" aria-selected="false">Completed jobs</button>
+            <span class="tab-ind" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div role="tabpanel" id="p-inst" aria-labelledby="t-inst" class="gallery" data-stagger>
+          <figure class="ph"><div class="ph-box"><svg class="ic"><use href="#i-camera"/></svg><span>Installation photo coming soon</span></div><figcaption>Installation 01<span>Location / date</span></figcaption></figure>
+          <figure class="ph"><div class="ph-box"><svg class="ic"><use href="#i-camera"/></svg><span>Installation photo coming soon</span></div><figcaption>Installation 02<span>Location / date</span></figcaption></figure>
+          <figure class="ph"><div class="ph-box"><svg class="ic"><use href="#i-camera"/></svg><span>Installation photo coming soon</span></div><figcaption>Installation 03<span>Location / date</span></figcaption></figure>
+          <figure class="ph"><div class="ph-box"><svg class="ic"><use href="#i-camera"/></svg><span>Installation photo coming soon</span></div><figcaption>Installation 04<span>Location / date</span></figcaption></figure>
+          <figure class="ph"><div class="ph-box"><svg class="ic"><use href="#i-camera"/></svg><span>Installation photo coming soon</span></div><figcaption>Installation 05<span>Location / date</span></figcaption></figure>
+          <figure class="ph"><div class="ph-box"><svg class="ic"><use href="#i-camera"/></svg><span>Installation photo coming soon</span></div><figcaption>Installation 06<span>Location / date</span></figcaption></figure>
+        </div>
+        <div role="tabpanel" id="p-done" aria-labelledby="t-done" class="gallery" data-stagger hidden>
+          <figure class="ph"><div class="ph-box"><svg class="ic"><use href="#i-camera"/></svg><span>Job photo coming soon</span></div><figcaption>Completed job 01<span>Location / date</span></figcaption></figure>
+          <figure class="ph"><div class="ph-box"><svg class="ic"><use href="#i-camera"/></svg><span>Job photo coming soon</span></div><figcaption>Completed job 02<span>Location / date</span></figcaption></figure>
+          <figure class="ph"><div class="ph-box"><svg class="ic"><use href="#i-camera"/></svg><span>Job photo coming soon</span></div><figcaption>Completed job 03<span>Location / date</span></figcaption></figure>
+          <figure class="ph"><div class="ph-box"><svg class="ic"><use href="#i-camera"/></svg><span>Job photo coming soon</span></div><figcaption>Completed job 04<span>Location / date</span></figcaption></figure>
+          <figure class="ph"><div class="ph-box"><svg class="ic"><use href="#i-camera"/></svg><span>Job photo coming soon</span></div><figcaption>Completed job 05<span>Location / date</span></figcaption></figure>
+          <figure class="ph"><div class="ph-box"><svg class="ic"><use href="#i-camera"/></svg><span>Job photo coming soon</span></div><figcaption>Completed job 06<span>Location / date</span></figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec alt" id="about">
+    <div class="wrap about">
+      <div class="about-text" data-reveal="left">
+        <p class="kicker">About</p>
+        <h2 style="font-size:clamp(2rem,5vw,3.1rem);margin-bottom:20px">Licensed, certified,<br>and local.</h2>
+        <p>CJ Pro Services LLC is a heating, cooling, electrical and home repair company based in Laurel, Maryland.</p>
+        <p>We take care of the whole job ourselves: diagnosing the problem, quoting it in writing, doing the work, and testing everything before we call it done.</p>
+        <div class="area"><svg class="ic"><use href="#i-pin"/></svg><div><b>Based in Laurel, MD</b><br><span style="color:var(--muted)">Serving Laurel and nearby Maryland communities. Not sure we cover you? Just call.</span></div></div>
+      </div>
+      <div class="cred" data-reveal="right">
+        <h3>Credentials</h3>
+        <ul>
+          <li><svg class="ic"><use href="#i-shield"/></svg><div><b>Maryland HVACR license</b><small>License #52758</small></div></li>
+          <li><svg class="ic"><use href="#i-home"/></svg><div><b>Maryland Home Improvement (MHIC)</b><small>License #114256</small></div></li>
+          <li><svg class="ic"><use href="#i-leaf"/></svg><div><b>EPA certified technician</b><small>Safe refrigerant handling</small></div></li>
+          <li><svg class="ic"><use href="#i-gauge"/></svg><div><b>CAMT &amp; CFC certified</b><small>HVACR trained and certified</small></div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec light">
+    <div class="wrap">
+      <div class="band" data-reveal="scale">
+        <h2>Heat out? AC down?</h2>
+        <p>Call and tell us what's happening.</p>
+        <a class="btn btn-lg" href="tel:+13013798609"><svg class="ic"><use href="#i-phone"/></svg>(301) 379-8609</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="contact">
+    <div class="wrap contact">
+      <div class="contact-info" data-reveal="left">
+        <p class="kicker">Contact</p>
+        <h2 style="font-size:clamp(2rem,5vw,3.1rem);margin-bottom:16px">Get a quote</h2>
+        <p>Call for the fastest answer, or send the form and we'll get back to you.</p>
+        <a class="big-phone" href="tel:+13013798609"><svg class="ic"><use href="#i-phone"/></svg>(301) 379-8609</a>
+        <p style="margin:0">CJ Pro Services LLC<br>Laurel, Maryland</p>
+      </div>
+      <form class="form" data-demo data-reveal="right">
+        <label>Name<input name="name" autocomplete="name" required></label>
+        <label>Phone<input name="phone" type="tel" autocomplete="tel" inputmode="tel" required></label>
+        <label class="full">Email (optional)<input name="email" type="email" autocomplete="email"></label>
+        <label class="full">What do you need?
+          <select name="service" required>
+            <option value="">Choose one</option>
+            <option>Heating repair</option><option>AC repair</option><option>Heat pump install</option>
+            <option>System replacement</option><option>Maintenance</option><option>Electrical work</option><option>Home repair</option><option>Something else</option>
+          </select>
+        </label>
+        <label class="full">Tell us a little more<textarea name="message" rows="4"></textarea></label>
+        <div class="full"><button class="btn btn-accent btn-lg" type="submit" style="width:100%"><svg class="ic"><use href="#i-quote"/></svg>Request my quote</button></div>
+        <p class="note full">Test site: this form isn't connected yet.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-in">
+      <div><img src="assets/lockup-reverse.png" alt="CJ Pro Services" width="475" height="120"><p>Heating, cooling, electrical and home repair in Laurel, Maryland.</p></div>
+      <div><h4>Explore</h4><ul><li><a href="#services">Services</a></li><li><a href="#work">Our work</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li></ul></div>
+      <div><h4>Reach us</h4><ul><li><a href="tel:+13013798609">(301) 379-8609</a></li><li>HVACR Lic. #52758</li><li>MHIC Lic. #114256</li></ul></div>
+    </div>
+    <div class="foot-base"><span>© <span data-year>2026</span> CJ Pro Services LLC</span><span>Test site · <a href="designs.html" data-keep-q>All designs</a></span></div>
   </div>
-  <div class="grid" data-stagger>
-    <a class="pick" href="design-1-night-shift.html" data-keep-q><div class="sw sw1"><img src="assets/lockup-reverse.png" alt=""></div><div class="body"><span class="num">Design 1</span><h2>Night Shift</h2><p>Dark navy all the way, with a glowing logo, soft air-flow lines and rounded cards.</p><span class="open">Open<svg class="ic"><use href="#i-arrow"/></svg></span></div></a>
-    <a class="pick" href="design-2-blueprint.html" data-keep-q><div class="sw sw2"><img src="assets/lockup-reverse.png" alt=""></div><div class="body"><span class="num">Design 2</span><h2>Blueprint</h2><p>A navy blueprint hero over cool grey "drawing paper". Technical and tidy. The lightest of the three, but still no bright white.</p><span class="open">Open<svg class="ic"><use href="#i-arrow"/></svg></span></div></a>
-    <a class="pick" href="design-3-truck-wrap.html" data-keep-q><div class="sw sw3"><img src="assets/lockup-reverse.png" alt=""></div><div class="body"><span class="num">Design 3</span><h2>Truck Wrap</h2><p>Bold and loud like a work van: big slanted type, orange stripes, a scrolling ticker and a swipe photo strip.</p><span class="open">Open<svg class="ic"><use href="#i-arrow"/></svg></span></div></a>
-  </div>
-  <p class="notes" data-reveal>Test site only. The photo areas are blank placeholders and the quote form isn't connected.</p>
+</footer>
+
+<div class="scrim" aria-hidden="true"></div>
+<aside class="drawer" id="drawer" aria-label="Menu" inert>
+  <div class="drawer-top"><img src="assets/lockup-reverse.png" alt="CJ Pro Services" width="475" height="120"><button class="drawer-close" aria-label="Close menu"><svg class="ic"><use href="#i-close"/></svg></button></div>
+  <nav class="drawer-nav" aria-label="Menu">
+    <a href="#services" style="--i:0">Services<svg class="ic"><use href="#i-arrow"/></svg></a>
+    <a href="#process" style="--i:1">How it works<svg class="ic"><use href="#i-arrow"/></svg></a>
+    <a href="#work" style="--i:2">Our work<svg class="ic"><use href="#i-arrow"/></svg></a>
+    <a href="#about" style="--i:3">About<svg class="ic"><use href="#i-arrow"/></svg></a>
+    <a href="#contact" style="--i:4">Contact<svg class="ic"><use href="#i-arrow"/></svg></a>
+  </nav>
+  <a class="btn btn-accent btn-lg" href="tel:+13013798609"><svg class="ic"><use href="#i-phone"/></svg>Call (301) 379-8609</a>
+  <a class="btn btn-ghost btn-lg" href="#contact">Request a quote</a>
+</aside>
+
+<div class="callbar">
+  <a class="btn btn-accent" href="tel:+13013798609"><svg class="ic"><use href="#i-phone"/></svg>Call now</a>
+  <a class="btn btn-ghost" href="#contact">Get a quote</a>
 </div>
+<a class="to-top" href="#top" aria-label="Back to top"><svg class="ic"><use href="#i-up"/></svg></a>
+<div class="toast" role="status" aria-live="polite"></div>
 <script src="assets/site.js" defer></script>
 </body>
 </html>

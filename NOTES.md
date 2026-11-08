@@ -3,9 +3,10 @@
 ## Status (2026-11-08)
 - Owner picked **Design 1 "Night Shift"** (`design-1-night-shift.html`). Colour rounds: brighter -> then "more white, too blue" + "a little too bright" -> now navy #0a234b alternating with soft-white (#eef1f6) sections for Services, Our work and Service area.
 - Owner's feature picks: add Electrical service (kept the other six), add Service area towns. Skipped: reviews, financing, brands, warranty, offers, maintenance plan, emergency line, online booking, FAQ, hours, team photo.
-- Service-area towns are a STARTER list Claude picked around Laurel (by county). The owner must confirm them. The electrical scope wording also needs the owner's OK.
+- Service area section (towns by county + small map) was built, then taken OUT at the owner's request ("leave out the map section for now, we'll work on that later"). It's in git history at commit 623c66e. The towns there were a starter list Claude picked, so the owner must confirm them. The electrical scope wording also needs the owner's OK.
 - Designs 2 (Blueprint) and 3 (Truck Wrap) are kept for reference only.
-- Preview: `http://localhost:8418/design-1-night-shift.html?motion=on` (the "cjpro-website" preview). The owner's PC has Windows
+- Live: https://iazca.github.io/CJProServices/ (GitHub Pages, public repo IAZCA/CJProServices). Design 1 is now `index.html`; the picker is `designs.html`.
+- Local preview: `http://localhost:8418/?motion=on` (the "cjpro-website" preview). The owner's PC has Windows
   animations off, so the page stays still unless `?motion=on` is in the address.
 - Photo areas (Installations / Completed jobs) are blank placeholders on purpose. The quote form is not connected.
 
