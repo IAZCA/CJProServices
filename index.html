@@ -12,7 +12,7 @@
 <script>(function(){var r=document.documentElement,q=new URLSearchParams(location.search).get('motion'),rm=matchMedia('(prefers-reduced-motion: reduce)').matches;r.dataset.motion=q==='on'?'on':q==='off'?'off':(rm?'off':'on');setTimeout(function(){if(!window.__siteReady)r.dataset.motion='off'},2500)})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,100..900&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/base.css">
 <style>
 :root {
@@ -45,7 +45,9 @@ h1, h2, h3, .drawer-nav a { font-stretch: 125%; font-weight: 850; letter-spacing
 .nav a { text-decoration: none; color: var(--muted); transition: color .25s; padding: 6px 0; }
 .nav a:hover, .nav a.active { color: var(--text); }
 .head-cta { display: none; }
-@media (min-width: 960px) { .nav { display: flex; } .head-cta { display: inline-flex; } }
+@media (min-width: 760px) { .head-cta { display: inline-flex; } }
+@media (min-width: 760px) and (max-width: 959px) { .head-cta { margin-left: auto; } .head-in .menu-btn { margin-left: 0; } }
+@media (min-width: 960px) { .nav { display: flex; } }
 .menu-btn { margin-left: auto; }
 
 /* hero */
@@ -75,7 +77,9 @@ h1, h2, h3, .drawer-nav a { font-stretch: 125%; font-weight: 850; letter-spacing
 @keyframes pulse { 50% { transform: scale(1.06); opacity: .8; } }
 @keyframes spin { to { transform: rotate(360deg); } }
 @media (max-width: 959px) { .hero { padding-top: 28px; } .hero-art { order: -1; } .hero-in { gap: 18px; } .emblem { width: min(44vw, 190px); } }
+@media (max-width: 959px) and (max-height: 500px) and (orientation: landscape) { .hero { padding-top: 18px; } .hero-in { grid-template-columns: 1fr auto; align-items: center; } .hero-art { order: 0; } .emblem { width: 150px; } }
 .scroll-cue { position: absolute; left: 50%; bottom: 26px; width: 26px; height: 42px; margin-left: -13px; border: 2px solid rgba(255,255,255,.3); border-radius: 14px; }
+.scroll-cue::before { content: ""; position: absolute; inset: -4px -11px; }
 .scroll-cue span { position: absolute; left: 50%; top: 8px; width: 4px; height: 8px; margin-left: -2px; border-radius: 2px; background: var(--accent); animation: cue 1.8s ease-in-out infinite; }
 @keyframes cue { 0% { opacity: 0; transform: translateY(0); } 30% { opacity: 1; } 100% { opacity: 0; transform: translateY(14px); } }
 @media (max-width: 759px) { .scroll-cue { display: none; } }
@@ -124,16 +128,65 @@ h1, h2, h3, .drawer-nav a { font-stretch: 125%; font-weight: 850; letter-spacing
 .tablist { background: rgba(255,255,255,.06); border: 1px solid var(--line); }
 .tablist [role="tab"] { color: var(--muted); }
 .tablist [aria-selected="true"] { color: var(--accent-ink); }
-.gallery { display: grid; gap: 14px; grid-template-columns: repeat(2, 1fr); }
-@media (min-width: 900px) { .gallery { grid-template-columns: repeat(3, 1fr); gap: 18px; } }
-.ph-box { aspect-ratio: 4 / 3; border-radius: 16px; display: grid; place-content: center; justify-items: center; gap: 10px; text-align: center; padding: 12px;
-  border: 2px dashed rgba(255,255,255,.16); background: repeating-linear-gradient(135deg, rgba(255,255,255,.025) 0 12px, transparent 12px 24px), var(--surface);
-  color: var(--muted); font-size: .86rem; font-weight: 600; transition: border-color .35s, transform .45s cubic-bezier(.2,.8,.2,1); }
-.ph-box .ic { font-size: 30px; color: rgba(254,91,0,.75); }
-@media (hover: hover) { .ph:hover .ph-box { border-color: rgba(254,91,0,.55); transform: translateY(-4px); } }
-.ph figcaption { margin-top: 10px; font-weight: 700; font-size: .92rem; }
-.ph figcaption span { display: block; font-weight: 500; color: var(--muted); font-size: .84rem; }
-@media (max-width: 479px) { .ph-box span { display: none; } }
+/* job photo carousels */
+.work-car .track { display: grid; grid-auto-flow: column; grid-auto-columns: 80%; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain; scrollbar-width: none; padding: 4px 0 16px; }
+.work-car .track::-webkit-scrollbar { display: none; }
+@media (max-width: 759px) { .work-car .track { margin-inline: -16px; padding-inline: 16px; scroll-padding-inline: 16px; } }
+@media (min-width: 640px) { .work-car .track { grid-auto-columns: calc(50% - 9px); gap: 18px; } }
+@media (min-width: 1000px) { .work-car .track { grid-auto-columns: calc(33.333% - 12px); } }
+.shot { margin: 0; min-width: 0; scroll-snap-align: start; }
+.shot-link { position: relative; display: block; aspect-ratio: 3 / 4; border-radius: 18px; overflow: hidden; isolation: isolate; background: #dde3ec;
+  box-shadow: 0 18px 34px -24px rgba(2,35,81,.6); outline-offset: 3px; -webkit-tap-highlight-color: transparent; }
+.shot-link::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(2,35,81,.12); pointer-events: none; }
+.shot-link img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.2,.8,.2,1); }
+.shot-zoom { position: absolute; right: 10px; top: 10px; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center;
+  background: rgba(3,17,42,.6); color: #fff; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); transition: background .25s, color .25s, transform .35s cubic-bezier(.2,.8,.2,1); }
+.shot-zoom .ic { font-size: 18px; }
+@media (hover: hover) { .shot-link:hover img { transform: scale(1.045); } .shot-link:hover .shot-zoom { background: var(--accent); color: var(--accent-ink); transform: scale(1.1); } }
+.shot-link:active img { transform: scale(.985); }
+.shot figcaption { margin-top: 12px; font-weight: 700; font-size: .95rem; }
+.shot figcaption span { display: block; margin-top: 2px; font-weight: 500; color: var(--muted); font-size: .86rem; }
+.work-car .car-nav { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
+.work-car .car-nav button { width: 48px; height: 48px; flex: none; border-radius: 50%; display: grid; place-items: center; cursor: pointer; background: #fff; color: var(--text);
+  border: 1px solid rgba(2,35,81,.16); transition: background .25s, color .25s, border-color .25s, opacity .25s, transform .2s; }
+.work-car .car-nav button .ic { font-size: 20px; }
+.work-car .car-nav .prev .ic { transform: rotate(180deg); }
+.work-car .car-nav button:disabled { opacity: .35; cursor: default; }
+.work-car .car-nav button:not(:disabled):active { transform: scale(.92); }
+@media (hover: hover) { .work-car .car-nav button:not(:disabled):hover { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); } }
+.car-bar { flex: 1; min-width: 40px; height: 4px; margin-left: 6px; border-radius: 4px; background: rgba(2,35,81,.1); overflow: hidden; }
+.car-bar i { display: block; width: 30%; height: 100%; border-radius: inherit; background: var(--accent); }
+.car-count { flex: none; min-width: 5.6em; text-align: right; font-weight: 700; font-size: .9rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+/* photo viewer */
+.lb { position: fixed; inset: 0; width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; overflow: hidden;
+  background: #030e22; color: #f0f4fa; }
+.lb::backdrop { background: transparent; }
+.lb[open] { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; }
+html.lb-open { overflow: hidden; }
+.lb-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: max(12px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) 10px max(16px, env(safe-area-inset-left)); }
+.lb-count { font-weight: 700; font-size: .95rem; color: #b8c7dc; font-variant-numeric: tabular-nums; }
+.lb-btn { width: 48px; height: 48px; flex: none; border-radius: 50%; display: grid; place-items: center; cursor: pointer; color: #fff;
+  background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); transition: background .2s, color .2s, border-color .2s, transform .2s; }
+.lb-btn .ic { font-size: 22px; }
+.lb-btn:active { transform: scale(.92); }
+.lb-prev .ic { transform: rotate(180deg); }
+@media (hover: hover) { .lb-btn:hover { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); } }
+.lb-stage { position: relative; touch-action: pan-y pinch-zoom; }
+.lb-stage img { position: absolute; inset: 0; margin: auto; max-width: calc(100% - 24px); max-height: 100%; border-radius: 12px; user-select: none; -webkit-user-drag: none; }
+.lb-bottom { display: grid; grid-template-columns: 48px 1fr 48px; align-items: center; gap: 12px; width: min(100%, 760px); justify-self: center;
+  padding: 12px max(16px, env(safe-area-inset-right)) max(16px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); }
+.lb-cap { margin: 0; text-align: center; font-weight: 700; }
+.lb-cap span { display: block; font-weight: 500; color: #b8c7dc; font-size: .9rem; }
+html[data-motion="on"] .lb[open] { animation: lb-in .3s ease-out; }
+html[data-motion="on"] .lb-stage img.lb-pop { animation: lb-pop .4s cubic-bezier(.2,.8,.2,1); }
+html[data-motion="on"] .lb-stage img.lb-from-r { animation: lb-from-r .38s cubic-bezier(.2,.8,.2,1); }
+html[data-motion="on"] .lb-stage img.lb-from-l { animation: lb-from-l .38s cubic-bezier(.2,.8,.2,1); }
+@keyframes lb-in { from { opacity: 0; } }
+@keyframes lb-pop { from { opacity: 0; transform: scale(.94); } }
+@keyframes lb-from-r { from { opacity: 0; transform: translateX(48px); } }
+@keyframes lb-from-l { from { opacity: 0; transform: translateX(-48px); } }
 
 /* about */
 .about { display: grid; gap: 36px; align-items: start; }
@@ -157,6 +210,7 @@ h1, h2, h3, .drawer-nav a { font-stretch: 125%; font-weight: 850; letter-spacing
 /* soft-white sections (not pure white, so it doesn't glare) */
 .sec.light { --text: #0b2147; --muted: #4b5e7a; --line: rgba(2,35,81,.12); background: #eef1f6; color: var(--text); }
 .light .kicker { color: #c24200; }
+.sec.alt .kicker { color: var(--accent-hi); }
 .light .card { background: #fbfcfe; border-color: rgba(2,35,81,.1); box-shadow: 0 14px 34px -24px rgba(2,35,81,.45); }
 .light .card::before { background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 0%), rgba(254,91,0,.1), transparent 60%); }
 @media (hover: hover) { .light .card:hover { border-color: rgba(254,91,0,.5); box-shadow: 0 26px 46px -26px rgba(2,35,81,.5); } }
@@ -164,7 +218,6 @@ h1, h2, h3, .drawer-nav a { font-stretch: 125%; font-weight: 850; letter-spacing
 .light .tablist { background: #fff; border-color: rgba(2,35,81,.14); }
 .light .tablist [role="tab"] { color: var(--muted); }
 .light .tablist [aria-selected="true"] { color: var(--accent-ink); }
-.light .ph-box { background: repeating-linear-gradient(135deg, rgba(2,35,81,.035) 0 12px, transparent 12px 24px), #f8f9fc; border-color: rgba(2,35,81,.2); }
 
 /* call band */
 .band { position: relative; overflow: hidden; border-radius: 26px; padding: 44px 28px; text-align: center; background: linear-gradient(120deg, #fe5b00, #ff7f2a); color: var(--accent-ink); }
@@ -197,7 +250,7 @@ h1, h2, h3, .drawer-nav a { font-stretch: 125%; font-weight: 850; letter-spacing
 .foot a { text-decoration: none; }
 .foot a:hover { color: var(--text); }
 .foot li { margin-bottom: 8px; }
-.foot-base { margin-top: 36px; padding-top: 22px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; font-size: .86rem; }
+.foot-base { padding-right: 64px; margin-top: 36px; padding-top: 22px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; font-size: .86rem; }
 .callbar .btn-ghost { color: #fff; }
 </style>
 </head>
@@ -217,6 +270,7 @@ h1, h2, h3, .drawer-nav a { font-stretch: 125%; font-weight: 850; letter-spacing
   <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
   <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></symbol>
   <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-expand" viewBox="0 0 24 24"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></symbol>
   <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
   <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2L4.5 13.5H11L10 22l8.5-11.5H12z"/></symbol>
   <symbol id="i-quote" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9zM9 11h6M9 15h4"/></symbol>
@@ -311,7 +365,7 @@ h1, h2, h3, .drawer-nav a { font-stretch: 125%; font-weight: 850; letter-spacing
           <header class="sec-head" data-reveal>
             <p class="kicker">Our work</p>
             <h2>Installs &amp; finished jobs</h2>
-            <p>Photos from real jobs will go here.</p>
+            <p>Real photos from CJ Pro jobs. Swipe or use the arrows, and tap any photo to see it bigger.</p>
           </header>
           <div class="tablist" role="tablist" aria-label="Project photos" data-reveal style="--i:1">
             <button role="tab" id="t-inst" aria-controls="p-inst" aria-selected="true">Installations</button>
@@ -319,21 +373,34 @@ h1, h2, h3, .drawer-nav a { font-stretch: 125%; font-weight: 850; letter-spacing
             <span class="tab-ind" aria-hidden="true"></span>
           </div>
         </div>
-        <div role="tabpanel" id="p-inst" aria-labelledby="t-inst" class="gallery" data-stagger>
-          <figure class="ph"><div class="ph-box"><svg class="ic"><use href="#i-camera"/></svg><span>Installation photo coming soon</span></div><figcaption>Installation 01<span>Location / date</span></figcaption></figure>
-          <figure class="ph"><div class="ph-box"><svg class="ic"><use href="#i-camera"/></svg><span>Installation photo coming soon</span></div><figcaption>Installation 02<span>Location / date</span></figcaption></figure>
-          <figure class="ph"><div class="ph-box"><svg class="ic"><use href="#i-camera"/></svg><span>Installation photo coming soon</span></div><figcaption>Installation 03<span>Location / date</span></figcaption></figure>
-          <figure class="ph"><div class="ph-box"><svg class="ic"><use href="#i-camera"/></svg><span>Installation photo coming soon</span></div><figcaption>Installation 04<span>Location / date</span></figcaption></figure>
-          <figure class="ph"><div class="ph-box"><svg class="ic"><use href="#i-camera"/></svg><span>Installation photo coming soon</span></div><figcaption>Installation 05<span>Location / date</span></figcaption></figure>
-          <figure class="ph"><div class="ph-box"><svg class="ic"><use href="#i-camera"/></svg><span>Installation photo coming soon</span></div><figcaption>Installation 06<span>Location / date</span></figcaption></figure>
+        <div role="tabpanel" id="p-inst" aria-labelledby="t-inst">
+          <div class="car work-car" data-carousel data-reveal>
+          <div class="track" role="group" aria-label="Installation photos">
+            <figure class="shot"><a class="shot-link" href="assets/work/condenser-stand.jpg" data-lb aria-label="See larger: New outdoor unit"><img src="assets/work/condenser-stand-s.jpg" srcset="assets/work/condenser-stand-s.jpg 480w, assets/work/condenser-stand.jpg 900w" sizes="(min-width: 1000px) 380px, (min-width: 640px) 46vw, 80vw" width="480" height="640" alt="New condensing unit set on a stand beside a house" loading="lazy" decoding="async"><span class="shot-zoom" aria-hidden="true"><svg class="ic"><use href="#i-expand"/></svg></span></a><figcaption>New outdoor unit<span>Set level on a stand</span></figcaption></figure>
+            <figure class="shot"><a class="shot-link" href="assets/work/air-handler.jpg" data-lb aria-label="See larger: Air handler in a closet"><img src="assets/work/air-handler-s.jpg" srcset="assets/work/air-handler-s.jpg 480w, assets/work/air-handler.jpg 900w" sizes="(min-width: 1000px) 380px, (min-width: 640px) 46vw, 80vw" width="480" height="640" alt="New air handler installed in a utility closet" loading="lazy" decoding="async"><span class="shot-zoom" aria-hidden="true"><svg class="ic"><use href="#i-expand"/></svg></span></a><figcaption>Air handler in a closet<span>New R-454B system</span></figcaption></figure>
+            <figure class="shot"><a class="shot-link" href="assets/work/furnace-coil.jpg" data-lb aria-label="See larger: Gas furnace and coil"><img src="assets/work/furnace-coil-s.jpg" srcset="assets/work/furnace-coil-s.jpg 480w, assets/work/furnace-coil.jpg 900w" sizes="(min-width: 1000px) 380px, (min-width: 640px) 46vw, 80vw" width="480" height="640" alt="New gas furnace with its cooling coil installed in a basement" loading="lazy" decoding="async"><span class="shot-zoom" aria-hidden="true"><svg class="ic"><use href="#i-expand"/></svg></span></a><figcaption>Gas furnace and coil<span>Basement install</span></figcaption></figure>
+            <figure class="shot"><a class="shot-link" href="assets/work/heat-pump-board.jpg" data-lb aria-label="See larger: Heat pump start-up"><img src="assets/work/heat-pump-board-s.jpg" srcset="assets/work/heat-pump-board-s.jpg 480w, assets/work/heat-pump-board.jpg 900w" sizes="(min-width: 1000px) 380px, (min-width: 640px) 46vw, 80vw" width="480" height="640" alt="New heat pump with the service panel open during start-up" loading="lazy" decoding="async"><span class="shot-zoom" aria-hidden="true"><svg class="ic"><use href="#i-expand"/></svg></span></a><figcaption>Heat pump start-up<span>Checking the controls</span></figcaption></figure>
+            <figure class="shot"><a class="shot-link" href="assets/work/ac-startup.jpg" data-lb aria-label="See larger: Charging a new AC"><img src="assets/work/ac-startup-s.jpg" srcset="assets/work/ac-startup-s.jpg 480w, assets/work/ac-startup.jpg 900w" sizes="(min-width: 1000px) 380px, (min-width: 640px) 46vw, 80vw" width="480" height="640" alt="New AC condensing unit with refrigerant gauges connected" loading="lazy" decoding="async"><span class="shot-zoom" aria-hidden="true"><svg class="ic"><use href="#i-expand"/></svg></span></a><figcaption>Charging a new AC<span>Gauges on at start-up</span></figcaption></figure>
+            <figure class="shot"><a class="shot-link" href="assets/work/side-yard-condenser.jpg" data-lb aria-label="See larger: Tight side-yard install"><img src="assets/work/side-yard-condenser-s.jpg" srcset="assets/work/side-yard-condenser-s.jpg 480w, assets/work/side-yard-condenser.jpg 900w" sizes="(min-width: 1000px) 380px, (min-width: 640px) 46vw, 80vw" width="480" height="640" alt="New condensing unit in a narrow brick side yard with gauges attached" loading="lazy" decoding="async"><span class="shot-zoom" aria-hidden="true"><svg class="ic"><use href="#i-expand"/></svg></span></a><figcaption>Tight side-yard install<span>New unit, new line set</span></figcaption></figure>
+            <figure class="shot"><a class="shot-link" href="assets/work/horizontal-furnace.jpg" data-lb aria-label="See larger: Crawlspace furnace"><img src="assets/work/horizontal-furnace-s.jpg" srcset="assets/work/horizontal-furnace-s.jpg 640w, assets/work/horizontal-furnace.jpg 1200w" sizes="(min-width: 1000px) 380px, (min-width: 640px) 46vw, 80vw" width="640" height="480" alt="Furnace installed lying flat in a crawlspace, the way horizontal models are built to sit" loading="lazy" decoding="async" style="object-position:58% 50%"><span class="shot-zoom" aria-hidden="true"><svg class="ic"><use href="#i-expand"/></svg></span></a><figcaption>Crawlspace furnace<span>Horizontal model, made to lie flat</span></figcaption></figure>
+            <figure class="shot"><a class="shot-link" href="assets/work/delivery.jpg" data-lb aria-label="See larger: Delivery day"><img src="assets/work/delivery-s.jpg" srcset="assets/work/delivery-s.jpg 419w, assets/work/delivery.jpg 786w" sizes="(min-width: 1000px) 380px, (min-width: 640px) 46vw, 80vw" width="419" height="640" alt="Boxed evaporator coil and condensing unit waiting to be installed" loading="lazy" decoding="async"><span class="shot-zoom" aria-hidden="true"><svg class="ic"><use href="#i-expand"/></svg></span></a><figcaption>Delivery day<span>Coil and outdoor unit, ready to go in</span></figcaption></figure>
+          </div>
+          <div class="car-nav"><button class="prev" type="button" aria-label="Previous photos"><svg class="ic"><use href="#i-arrow"/></svg></button><button class="next" type="button" aria-label="Next photos"><svg class="ic"><use href="#i-arrow"/></svg></button><span class="car-bar" aria-hidden="true"><i></i></span><span class="car-count">8 photos</span></div>
+          </div>
         </div>
-        <div role="tabpanel" id="p-done" aria-labelledby="t-done" class="gallery" data-stagger hidden>
-          <figure class="ph"><div class="ph-box"><svg class="ic"><use href="#i-camera"/></svg><span>Job photo coming soon</span></div><figcaption>Completed job 01<span>Location / date</span></figcaption></figure>
-          <figure class="ph"><div class="ph-box"><svg class="ic"><use href="#i-camera"/></svg><span>Job photo coming soon</span></div><figcaption>Completed job 02<span>Location / date</span></figcaption></figure>
-          <figure class="ph"><div class="ph-box"><svg class="ic"><use href="#i-camera"/></svg><span>Job photo coming soon</span></div><figcaption>Completed job 03<span>Location / date</span></figcaption></figure>
-          <figure class="ph"><div class="ph-box"><svg class="ic"><use href="#i-camera"/></svg><span>Job photo coming soon</span></div><figcaption>Completed job 04<span>Location / date</span></figcaption></figure>
-          <figure class="ph"><div class="ph-box"><svg class="ic"><use href="#i-camera"/></svg><span>Job photo coming soon</span></div><figcaption>Completed job 05<span>Location / date</span></figcaption></figure>
-          <figure class="ph"><div class="ph-box"><svg class="ic"><use href="#i-camera"/></svg><span>Job photo coming soon</span></div><figcaption>Completed job 06<span>Location / date</span></figcaption></figure>
+        <div role="tabpanel" id="p-done" aria-labelledby="t-done" hidden>
+          <div class="car work-car" data-carousel data-reveal>
+          <div class="track" role="group" aria-label="Completed job photos">
+            <figure class="shot"><a class="shot-link" href="assets/work/new-thermostat.jpg" data-lb aria-label="See larger: New thermostat"><img src="assets/work/new-thermostat-s.jpg" srcset="assets/work/new-thermostat-s.jpg 480w, assets/work/new-thermostat.jpg 900w" sizes="(min-width: 1000px) 380px, (min-width: 640px) 46vw, 80vw" width="480" height="640" alt="New digital thermostat mounted on a wall" loading="lazy" decoding="async"><span class="shot-zoom" aria-hidden="true"><svg class="ic"><use href="#i-expand"/></svg></span></a><figcaption>New thermostat<span>Wired, set and tested</span></figcaption></figure>
+            <figure class="shot"><a class="shot-link" href="assets/work/fan-motor.jpg" data-lb aria-label="See larger: Fan motor replacement"><img src="assets/work/fan-motor-s.jpg" srcset="assets/work/fan-motor-s.jpg 480w, assets/work/fan-motor.jpg 900w" sizes="(min-width: 1000px) 380px, (min-width: 640px) 46vw, 80vw" width="480" height="640" alt="Outdoor unit fan motor and blade lifted out for replacement" loading="lazy" decoding="async"><span class="shot-zoom" aria-hidden="true"><svg class="ic"><use href="#i-expand"/></svg></span></a><figcaption>Fan motor replacement<span>Outdoor unit repair</span></figcaption></figure>
+            <figure class="shot"><a class="shot-link" href="assets/work/amp-test.jpg" data-lb aria-label="See larger: Electrical testing"><img src="assets/work/amp-test-s.jpg" srcset="assets/work/amp-test-s.jpg 480w, assets/work/amp-test.jpg 900w" sizes="(min-width: 1000px) 380px, (min-width: 640px) 46vw, 80vw" width="480" height="640" alt="Clamp meter checking the amp draw on an outdoor AC unit" loading="lazy" decoding="async"><span class="shot-zoom" aria-hidden="true"><svg class="ic"><use href="#i-expand"/></svg></span></a><figcaption>Electrical testing<span>Amp draw on an outdoor unit</span></figcaption></figure>
+            <figure class="shot"><a class="shot-link" href="assets/work/blower-repair.jpg" data-lb aria-label="See larger: Blower repair"><img src="assets/work/blower-repair-s.jpg" srcset="assets/work/blower-repair-s.jpg 480w, assets/work/blower-repair.jpg 900w" sizes="(min-width: 1000px) 380px, (min-width: 640px) 46vw, 80vw" width="480" height="640" alt="Blower and wiring inside an indoor unit with the panel off" loading="lazy" decoding="async"><span class="shot-zoom" aria-hidden="true"><svg class="ic"><use href="#i-expand"/></svg></span></a><figcaption>Blower repair<span>Motor and wiring</span></figcaption></figure>
+            <figure class="shot"><a class="shot-link" href="assets/work/furnace-service.jpg" data-lb aria-label="See larger: Furnace service"><img src="assets/work/furnace-service-s.jpg" srcset="assets/work/furnace-service-s.jpg 480w, assets/work/furnace-service.jpg 900w" sizes="(min-width: 1000px) 380px, (min-width: 640px) 46vw, 80vw" width="480" height="640" alt="Older gas furnace opened up to service the gas valve and burners" loading="lazy" decoding="async"><span class="shot-zoom" aria-hidden="true"><svg class="ic"><use href="#i-expand"/></svg></span></a><figcaption>Furnace service<span>Gas valve and burners</span></figcaption></figure>
+            <figure class="shot"><a class="shot-link" href="assets/work/boiler-control.jpg" data-lb aria-label="See larger: Boiler controls"><img src="assets/work/boiler-control-s.jpg" srcset="assets/work/boiler-control-s.jpg 480w, assets/work/boiler-control.jpg 900w" sizes="(min-width: 1000px) 380px, (min-width: 640px) 46vw, 80vw" width="480" height="640" alt="Boiler control display showing heat and outdoor temperatures" loading="lazy" decoding="async"><span class="shot-zoom" aria-hidden="true"><svg class="ic"><use href="#i-expand"/></svg></span></a><figcaption>Boiler controls<span>Heat settings dialed in</span></figcaption></figure>
+            <figure class="shot"><a class="shot-link" href="assets/work/old-thermostat.jpg" data-lb aria-label="See larger: Old thermostat off"><img src="assets/work/old-thermostat-s.jpg" srcset="assets/work/old-thermostat-s.jpg 480w, assets/work/old-thermostat.jpg 900w" sizes="(min-width: 1000px) 380px, (min-width: 640px) 46vw, 80vw" width="480" height="640" alt="Old thermostat base with its wiring, removed before the replacement" loading="lazy" decoding="async"><span class="shot-zoom" aria-hidden="true"><svg class="ic"><use href="#i-expand"/></svg></span></a><figcaption>Old thermostat off<span>Before the new one went in</span></figcaption></figure>
+          </div>
+          <div class="car-nav"><button class="prev" type="button" aria-label="Previous photos"><svg class="ic"><use href="#i-arrow"/></svg></button><button class="next" type="button" aria-label="Next photos"><svg class="ic"><use href="#i-arrow"/></svg></button><span class="car-bar" aria-hidden="true"><i></i></span><span class="car-count">7 photos</span></div>
+          </div>
         </div>
       </div>
     </div>
@@ -402,7 +469,7 @@ h1, h2, h3, .drawer-nav a { font-stretch: 125%; font-weight: 850; letter-spacing
   <div class="wrap">
     <div class="foot-in">
       <div><img src="assets/lockup-reverse.png" alt="CJ Pro Services" width="475" height="120"><p>Heating, cooling, electrical and home repair in Laurel, Maryland.</p></div>
-      <div><h4>Explore</h4><ul><li><a href="#services">Services</a></li><li><a href="#work">Our work</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li></ul></div>
+      <div><h4>Explore</h4><ul><li><a href="#services">Services</a></li><li><a href="#process">How it works</a></li><li><a href="#work">Our work</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li></ul></div>
       <div><h4>Reach us</h4><ul><li><a href="tel:+13013798609">(301) 379-8609</a></li><li>HVACR Lic. #52758</li><li>MHIC Lic. #114256</li></ul></div>
     </div>
     <div class="foot-base"><span>© <span data-year>2026</span> CJ Pro Services LLC</span><span>Test site · <a href="designs.html" data-keep-q>All designs</a></span></div>
@@ -428,6 +495,11 @@ h1, h2, h3, .drawer-nav a { font-stretch: 125%; font-weight: 850; letter-spacing
   <a class="btn btn-ghost" href="#contact">Get a quote</a>
 </div>
 <a class="to-top" href="#top" aria-label="Back to top"><svg class="ic"><use href="#i-up"/></svg></a>
+<dialog class="lb" id="lightbox" aria-label="Job photo viewer">
+  <div class="lb-top"><span class="lb-count"></span><button class="lb-btn lb-close" type="button" aria-label="Close photo viewer"><svg class="ic"><use href="#i-close"/></svg></button></div>
+  <div class="lb-stage"><img alt=""></div>
+  <div class="lb-bottom"><button class="lb-btn lb-prev" type="button" aria-label="Previous photo"><svg class="ic"><use href="#i-arrow"/></svg></button><p class="lb-cap" aria-live="polite"></p><button class="lb-btn lb-next" type="button" aria-label="Next photo"><svg class="ic"><use href="#i-arrow"/></svg></button></div>
+</dialog>
 <div class="toast" role="status" aria-live="polite"></div>
 <script src="assets/site.js" defer></script>
 </body>

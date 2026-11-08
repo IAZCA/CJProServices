@@ -3,7 +3,6 @@
   'use strict';
   const root = document.documentElement;
   const motion = root.dataset.motion === 'on';
-  window.__siteReady = true;
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
   const head = $('.site-head');
@@ -127,6 +126,7 @@
     }), { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
     targets.forEach(el => rio.observe(el));
   }
+  window.__siteReady = true;
 
   /* ---------- phone menu drawer ---------- */
   const menuBtn = $('.menu-btn'), drawer = $('.drawer');
@@ -193,23 +193,110 @@
     const track = $('.track', c);
     if (!track) return;
     const prev = $('.prev', c), next = $('.next', c);
+    const count = $('.car-count', c), bar = $('.car-bar i', c);
+    const gap = () => parseFloat(getComputedStyle(track).columnGap) || 0;
+    const step = () => { const card = track.firstElementChild; return card ? card.getBoundingClientRect().width + gap() : 0; };
     const by = dir => {
-      const card = track.firstElementChild;
-      const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
-      const w = card ? card.getBoundingClientRect().width + gap : track.clientWidth * 0.8;
+      const w = step() || track.clientWidth * 0.8;
       track.scrollBy({ left: dir * w, behavior: motion ? 'smooth' : 'auto' });
     };
     const upd = () => {
+      const max = track.scrollWidth - track.clientWidth;
       if (prev) prev.disabled = track.scrollLeft < 4;
-      if (next) next.disabled = track.scrollLeft > track.scrollWidth - track.clientWidth - 4;
+      if (next) next.disabled = track.scrollLeft > max - 4;
+      const s = step(), total = track.children.length;
+      if (!s || !total) return;
+      const cs = getComputedStyle(track);
+      const inner = track.clientWidth - (parseFloat(cs.paddingLeft) || 0) - (parseFloat(cs.paddingRight) || 0);
+      const seen = Math.max(1, Math.min(total, Math.round((inner + gap()) / s)));
+      let first = Math.round(track.scrollLeft / s) + 1;
+      if (track.scrollLeft >= max - 4) first = total - seen + 1;
+      first = Math.max(1, Math.min(first, total - seen + 1));
+      const last = first + seen - 1;
+      if (count) count.textContent = seen > 1 ? `${first}–${last} of ${total}` : `${first} of ${total}`;
+      if (bar) {
+        const f = Math.min(1, track.clientWidth / track.scrollWidth);
+        bar.style.width = (f * 100) + '%';
+        bar.style.transform = `translateX(${max > 0 ? (track.scrollLeft / max) * ((1 - f) / f) * 100 : 0}%)`;
+      }
     };
     if (prev) prev.addEventListener('click', () => by(-1));
     if (next) next.addEventListener('click', () => by(1));
     track.addEventListener('scroll', upd, { passive: true });
     addEventListener('resize', upd);
     document.addEventListener('panelshown', upd);
+    addEventListener('load', upd);
     upd();
   });
+
+  /* ---------- photo viewer: tap a job photo to see it bigger ---------- */
+  const lb = $('#lightbox');
+  if (lb && typeof lb.showModal === 'function') {
+    const stage = $('.lb-stage', lb), lbImg = $('img', stage), lbCap = $('.lb-cap', lb), lbCount = $('.lb-count', lb);
+    let set = [], cur = 0, swiped = false;
+    const anim = cls => {
+      lbImg.classList.remove('lb-pop', 'lb-from-r', 'lb-from-l');
+      void lbImg.offsetWidth;
+      lbImg.classList.add(cls);
+    };
+    const show = (i, dir) => {
+      if (!set.length) return;
+      cur = (i + set.length) % set.length;
+      const a = set[cur], thumb = $('img', a), cap = a.closest('figure') && $('figcaption', a.closest('figure'));
+      const want = cur;
+      lbImg.alt = thumb ? thumb.alt : '';
+      lbImg.src = thumb ? (thumb.currentSrc || thumb.src) : a.href;   // already loaded: shows at once
+      const full = new Image();
+      full.onload = () => { if (want === cur && lb.open) lbImg.src = a.href; };
+      full.src = a.href;
+      lbCap.replaceChildren(...(cap ? [...cap.cloneNode(true).childNodes] : []));
+      lbCount.textContent = `${cur + 1} / ${set.length}`;
+      anim(dir > 0 ? 'lb-from-r' : dir < 0 ? 'lb-from-l' : 'lb-pop');
+      [1, -1].forEach(d => { const n = set[(cur + d + set.length) % set.length]; if (n) new Image().src = n.href; });
+    };
+    const open = a => {
+      set = $$('[data-lb]', a.closest('.track') || document);
+      root.classList.add('lb-open');
+      lb.showModal();
+      show(Math.max(0, set.indexOf(a)), 0);
+    };
+    lb.addEventListener('close', () => {
+      root.classList.remove('lb-open');
+      const a = set[cur];
+      if (!a) return;
+      const track = a.closest('.track'), shot = a.closest('.shot');
+      if (track && shot) {   // keep the carousel on the photo you ended on
+        const tr = track.getBoundingClientRect(), sr = shot.getBoundingClientRect();
+        if (sr.left < tr.left || sr.right > tr.right) track.scrollBy({ left: sr.left - tr.left - (parseFloat(getComputedStyle(track).paddingLeft) || 0), behavior: 'auto' });
+      }
+      a.focus({ preventScroll: true });
+    });
+    $$('[data-lb]').forEach(a => a.addEventListener('click', e => {
+      if (e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;   // let "open in new tab" through
+      e.preventDefault();
+      open(a);
+    }));
+    $('.lb-prev', lb).addEventListener('click', () => show(cur - 1, -1));
+    $('.lb-next', lb).addEventListener('click', () => show(cur + 1, 1));
+    $('.lb-close', lb).addEventListener('click', () => lb.close());
+    lb.addEventListener('click', e => {
+      if (swiped) { swiped = false; return; }
+      if (e.target === lb || e.target === stage) lb.close();
+    });
+    lb.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); show(cur + 1, 1); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); show(cur - 1, -1); }
+    });
+    let sx = null, sy = 0;
+    stage.addEventListener('pointerdown', e => { if (e.isPrimary) { sx = e.clientX; sy = e.clientY; swiped = false; } });
+    stage.addEventListener('pointerup', e => {
+      if (sx === null) return;
+      const dx = e.clientX - sx, dy = e.clientY - sy;
+      sx = null;
+      if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.2) { swiped = true; show(cur + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1); }
+    });
+    stage.addEventListener('pointercancel', () => { sx = null; });
+  }
 
   /* ---------- soft glow that follows the pointer on cards ---------- */
   if (matchMedia('(hover: hover) and (pointer: fine)').matches) {

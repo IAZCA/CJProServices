@@ -1,14 +1,15 @@
 # CJ Pro Services test website: notes
 
 ## Status (2026-11-08)
-- Owner picked **Design 1 "Night Shift"** (`design-1-night-shift.html`). Colour rounds: brighter -> then "more white, too blue" + "a little too bright" -> now navy #0a234b alternating with soft-white (#eef1f6) sections for Services, Our work and Service area.
+- Owner picked **Design 1 "Night Shift"** (now `index.html`). Colour rounds: brighter -> then "more white, too blue" + "a little too bright" -> now navy #0a234b alternating with soft-white (#eef1f6) sections for Services and Our work.
 - Owner's feature picks: add Electrical service (kept the other six), add Service area towns. Skipped: reviews, financing, brands, warranty, offers, maintenance plan, emergency line, online booking, FAQ, hours, team photo.
 - Service area section (towns by county + small map) was built, then taken OUT at the owner's request ("leave out the map section for now, we'll work on that later"). It's in git history at commit 623c66e. The towns there were a starter list Claude picked, so the owner must confirm them. The electrical scope wording also needs the owner's OK.
 - Designs 2 (Blueprint) and 3 (Truck Wrap) are kept for reference only.
 - Live: https://iazca.github.io/CJProServices/ (GitHub Pages, public repo IAZCA/CJProServices). Design 1 is now `index.html`; the picker is `designs.html`.
 - Local preview: `http://localhost:8418/?motion=on` (the "cjpro-website" preview). The owner's PC has Windows
   animations off, so the page stays still unless `?motion=on` is in the address.
-- Photo areas (Installations / Completed jobs) are blank placeholders on purpose. The quote form is not connected.
+- Our work: the owner's 15 job photos (2026-11-08) in two swipe carousels (Installations 8, Completed jobs 7) with a tap-to-enlarge viewer.
+  The quote form is not connected.
 
 ## Business facts used (from the invoice template)
 - CJ PRO SERVICES LLC · Laurel, MD · (301) 379-8609
@@ -16,6 +17,14 @@
 - Real job on invoice 817: Trane 30,000 BTU heat pump with R-454B (A2L) refrigerant, old system removed, lines brazed, 7.5 kW heater, start-up test.
 - The street address on the invoice is left OFF the site on purpose until the owner says it is OK to publish.
 - Logo colours: navy `#022351`, orange `#FE5B00` (from `Invoice\cj_pro_logo.png`).
+
+## Job photos (assets/work/)
+- Built by `photos_build.py` (Claude's scratchpad) from the owner's uploads: privacy edits, one colour grade (neutral white balance, levels,
+  exposure, gentle S-curve, vibrance, slight warmth, sharpen), two sizes (`name.jpg` 1200px long side, `name-s.jpg` 640px), all metadata stripped.
+- Privacy edits: another company's sticker with a phone number blurred (furnace-coil); the delivery photo cropped to the boxes
+  (a person and parked cars were in it). None of the uploads carried GPS.
+- The crawlspace furnace photo is level (joists on top, floor at the bottom); the furnace is a horizontal model lying flat, so its logo reads sideways.
+- Captions are Claude's reading of each photo. The owner should confirm them.
 
 ## Copy to confirm with the owner
 - Service list: heating repair, AC repair, heat pump installs, system replacement, maintenance, home repair (MHIC).
